@@ -7,15 +7,27 @@ class ChooseLocation extends StatefulWidget {
 }
 
 class _ChooseLocationState extends State<ChooseLocation> {
-  List<WorldTime> locations = [
-    WorldTime(url: 'Europe/London', location: 'London', flag: 'uk.png'),
-    WorldTime(url: 'Europe/Berlin', location: 'Athens', flag: 'greece.png'),
-    WorldTime(url: 'Africa/Cairo', location: 'Cairo', flag: 'egypt.png'),
-    WorldTime(url: 'Africa/Nairobi', location: 'Nairobi', flag: 'kenya.png'),
-    WorldTime(url: 'America/Chicago', location: 'Chicago', flag: 'usa.png'),
-    WorldTime(url: 'America/New_York', location: 'New York', flag: 'usa.png'),
-    WorldTime(url: 'Asia/Seoul', location: 'Seoul', flag: 'south_korea.png'),
-    WorldTime(url: 'Asia/Jakarta', location: 'Jakarta', flag: 'indonesia.png'),
+  List<CountryModel> locations = [
+    CountryModel(url: 'Europe/London', location: 'London', flag: 'uk.png'),
+    CountryModel(url: 'Europe/Berlin', location: 'Athens', flag: 'greece.png'),
+    CountryModel(url: 'Africa/Cairo', location: 'Cairo', flag: 'egypt.png'),
+    CountryModel(url: 'Africa/Nairobi', location: 'Nairobi', flag: 'kenya.png'),
+    CountryModel(url: 'America/Chicago', location: 'Chicago', flag: 'usa.png'),
+    CountryModel(
+        url: 'America/New_York', location: 'New York', flag: 'usa.png'),
+    CountryModel(url: 'Asia/Seoul', location: 'Seoul', flag: 'south_korea.png'),
+    CountryModel(
+        url: 'Asia/Jakarta', location: 'Jakarta', flag: 'indonesia.png'),
+    CountryModel(url: 'Europe/London', location: 'London', flag: 'uk.png'),
+    CountryModel(url: 'Europe/Berlin', location: 'Athens', flag: 'greece.png'),
+    CountryModel(url: 'Africa/Cairo', location: 'Cairo', flag: 'egypt.png'),
+    CountryModel(url: 'Africa/Nairobi', location: 'Nairobi', flag: 'kenya.png'),
+    CountryModel(url: 'America/Chicago', location: 'Chicago', flag: 'usa.png'),
+    CountryModel(
+        url: 'America/New_York', location: 'New York', flag: 'usa.png'),
+    CountryModel(url: 'Asia/Seoul', location: 'Seoul', flag: 'south_korea.png'),
+    CountryModel(
+        url: 'Asia/Jakarta', location: 'Jakarta', flag: 'indonesia.png'),
   ];
 
   @override
@@ -25,6 +37,8 @@ class _ChooseLocationState extends State<ChooseLocation> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -33,19 +47,33 @@ class _ChooseLocationState extends State<ChooseLocation> {
       body: ListView.builder(
           itemCount: locations.length,
           itemBuilder: (context, index) {
-            return Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 1.0, horizontal: 4.0),
-              child: Card(
-                child: ListTile(
-                  onTap: () {},
-                  title: Text(locations[index].location),
-                  leading: CircleAvatar(
-                    backgroundImage:
-                        AssetImage('assets/${locations[index].flag}'),
+            return Container(
+              // width: ,
+              padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 4.0),
+              child: ListTile(
+                onTap: () {
+                  print(locations[index].location);
+                  setState(() {
+                    String locationName = '${locations[index].location}';
+                  });
+                  Navigator.pop(context);
+                },
+                title: Text(locations[index].location),
+                leading: Container(
+                  width: width * 0.3,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Radio(
+                          value: false, groupValue: true, onChanged: (vall) {}),
+                      CircleAvatar(
+                        backgroundImage:
+                            AssetImage('assets/${locations[index].flag}'),
+                      ),
+                    ],
                   ),
-                  trailing: Icon(Icons.info),
                 ),
+                trailing: Icon(Icons.info_outline),
               ),
             );
           }),

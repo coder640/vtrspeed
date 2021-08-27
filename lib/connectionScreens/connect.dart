@@ -1,11 +1,9 @@
 import 'dart:ui';
-import 'package:country_list_pick/country_list_pick.dart';
-import 'package:country_list_pick/country_selection_theme.dart';
-import 'package:country_list_pick/support/code_country.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:vtrspeed/connectionScreens/connecting.dart';
 import 'package:vtrspeed/customWidget/drawerWidget.dart';
+import 'package:vtrspeed/page/country_page.dart';
 
 class Connect extends StatefulWidget {
   const Connect({Key? key}) : super(key: key);
@@ -17,6 +15,8 @@ class Connect extends StatefulWidget {
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _ConnectState extends State<Connect> {
+  String locationName = 'USA';
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -72,57 +72,57 @@ class _ConnectState extends State<Connect> {
                   SizedBox(
                     height: 50,
                   ),
-                  CountryListPick(
-                      appBar: AppBar(
-                        backgroundColor: Colors.white,
-                        elevation: 0.0,
-                        title: Text(''),
-                      ),
-
-                      // if you need custome picker use this
-                      // pickerBuilder: (context, CountryCode countryCode){
-                      //   return Row(
-                      //     children: [
-                      //       Image.asset(
-                      //         countryCode.flagUri,
-                      //         package: 'country_list_pick',
-                      //       ),
-                      //       Text(countryCode.code),
-                      //       Text(countryCode.dialCode),
-                      //     ],
-                      //   );
-                      // },
-
-                      // To disable option set to false
-                      theme: CountryTheme(
-                        isShowFlag: true,
-                        isShowTitle: true,
-                        isShowCode: false,
-                        isDownIcon: false,
-                        showEnglishName: false,
-                      ),
-                      // Set default value
-                      initialSelection: '+62',
-                      // or
-                      // initialSelection: 'US'
-                      onChanged: (CountryCode? code) {
-                        print(code?.name);
-                        print(code?.code);
-                        print(code?.dialCode);
-                        print(code?.flagUri);
-                      },
-                      // Whether to allow the widget to set a custom UI overlay
-                      useUiOverlay: true,
-                      // Whether the country list should be wrapped in a SafeArea
-                      useSafeArea: false),
-                  // ElevatedButton(
-                  //     onPressed: () {
-                  //       Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //               builder: (context) => ChooseLocation()));
+                  // CountryListPick(
+                  //     appBar: AppBar(
+                  //       backgroundColor: Colors.white,
+                  //       elevation: 0.0,
+                  //       title: Text(''),
+                  //     ),
+                  //
+                  //     // if you need custome picker use this
+                  //     // pickerBuilder: (context, CountryCode countryCode){
+                  //     //   return Row(
+                  //     //     children: [
+                  //     //       Image.asset(
+                  //     //         countryCode.flagUri,
+                  //     //         package: 'country_list_pick',
+                  //     //       ),
+                  //     //       Text(countryCode.code),
+                  //     //       Text(countryCode.dialCode),
+                  //     //     ],
+                  //     //   );
+                  //     // },
+                  //
+                  //     // To disable option set to false
+                  //     theme: CountryTheme(
+                  //       isShowFlag: true,
+                  //       isShowTitle: true,
+                  //       isShowCode: false,
+                  //       isDownIcon: false,
+                  //       showEnglishName: false,
+                  //     ),
+                  //     // Set default value
+                  //     initialSelection: '+62',
+                  //     // or
+                  //     // initialSelection: 'US'
+                  //     onChanged: (CountryCode? code) {
+                  //       print(code?.name);
+                  //       print(code?.code);
+                  //       print(code?.dialCode);
+                  //       print(code?.flagUri);
                   //     },
-                  //     child: Text('')),
+                  //     // Whether to allow the widget to set a custom UI overlay
+                  //     useUiOverlay: true,
+                  //     // Whether the country list should be wrapped in a SafeArea
+                  //     useSafeArea: false),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChooseLocation()));
+                      },
+                      child: Text(locationName)),
                   SizedBox(
                     height: 10,
                   ),
