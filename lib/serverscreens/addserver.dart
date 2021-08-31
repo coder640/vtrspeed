@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:vtrspeed/customWidget/DropDownWidget.dart';
 
 class AddServer extends StatefulWidget {
-  const AddServer({Key? key}) : super(key: key);
+  const AddServer({Key? key, this.protocolType}) : super(key: key);
+
+  final String? protocolType;
 
   @override
   _AddServerState createState() => _AddServerState();
@@ -21,9 +23,14 @@ class _AddServerState extends State<AddServer> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          Icon(
-            Icons.check,
-            color: Colors.black,
+          IconButton(
+            icon: Icon(
+              Icons.check,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           )
         ],
       ),
@@ -35,7 +42,7 @@ class _AddServerState extends State<AddServer> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Protocol Type'),
-                DropDownWidget(),
+                Text(widget.protocolType!),
               ],
             ),
           ),

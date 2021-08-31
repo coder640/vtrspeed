@@ -36,6 +36,64 @@ class _DropDownWidgetState extends State<DropDownWidget> {
         setState(() {
           dropdownValue = newValue!;
         });
+        switch (newValue) {
+          case "WebVPN":
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddServer(
+                          protocolType: newValue,
+                        )));
+            break;
+          case " L2TP":
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddL2TP(
+                          protocolType: newValue,
+                        )));
+            break;
+          case "AnyConnect":
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddAnyConnect(
+                          protocolType: newValue,
+                        )));
+            break;
+          case "Trojan":
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddTrojan(
+                          protocolType: newValue,
+                        )));
+            break;
+          case "Cisco IPsec":
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddCiscoIPsec(
+                          protocolType: newValue,
+                        )));
+            break;
+          case "VLESS":
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddVLESS(
+                          protocolType: newValue,
+                        )));
+            break;
+          case "VMESS":
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddVMESS(
+                          protocolType: newValue,
+                        )));
+            break;
+        }
       },
       items: <String>[
         'WebVPN',
@@ -48,38 +106,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
       ].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: GestureDetector(
-              onTap: () {
-                if (value == 'WebVPN') {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AddServer()));
-                }
-                if (value == 'Trojan') {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AddTrojan()));
-                }
-                if (value == 'L2TP') {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AddL2TP()));
-                }
-                if (value == 'AnyConnect') {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AddAnyConnect()));
-                }
-                if (value == 'Cisco IPsec') {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AddCiscoIPsec()));
-                }
-                if (value == 'VLESS') {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AddVLESS()));
-                }
-                if (value == 'VMESS') {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AddVMESS()));
-                }
-              },
-              child: Text(value)),
+          child: Text(value),
         );
       }).toList(),
     );

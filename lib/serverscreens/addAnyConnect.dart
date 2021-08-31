@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'addserver.dart';
 
 class AddAnyConnect extends StatefulWidget {
-  const AddAnyConnect({Key? key}) : super(key: key);
+  const AddAnyConnect({Key? key, this.protocolType}) : super(key: key);
+
+  final String? protocolType;
 
   @override
   _AddAnyConnectState createState() => _AddAnyConnectState();
@@ -23,9 +25,14 @@ class _AddAnyConnectState extends State<AddAnyConnect> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          Icon(
-            Icons.check,
-            color: Colors.black,
+          IconButton(
+            icon: Icon(
+              Icons.check,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           )
         ],
       ),
@@ -37,7 +44,7 @@ class _AddAnyConnectState extends State<AddAnyConnect> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Protocol Type'),
-                // DropDownWidget(),
+                Text(widget.protocolType!),
               ],
             ),
           ),

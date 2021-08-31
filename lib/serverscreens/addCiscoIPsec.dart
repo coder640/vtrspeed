@@ -5,8 +5,9 @@ import 'package:vtrspeed/customWidget/DropDownWidget.dart';
 import 'addserver.dart';
 
 class AddCiscoIPsec extends StatefulWidget {
-  const AddCiscoIPsec({Key? key}) : super(key: key);
+  const AddCiscoIPsec({Key? key, this.protocolType}) : super(key: key);
 
+  final String? protocolType;
   @override
   _AddCiscoIPsecState createState() => _AddCiscoIPsecState();
 }
@@ -24,9 +25,14 @@ class _AddCiscoIPsecState extends State<AddCiscoIPsec> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          Icon(
-            Icons.check,
-            color: Colors.black,
+          IconButton(
+            icon: Icon(
+              Icons.check,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           )
         ],
       ),
@@ -38,7 +44,7 @@ class _AddCiscoIPsecState extends State<AddCiscoIPsec> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Protocol Type'),
-                DropDownWidget(),
+                Text(widget.protocolType!),
               ],
             ),
           ),

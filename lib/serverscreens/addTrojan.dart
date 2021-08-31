@@ -3,8 +3,9 @@ import 'package:vtrspeed/customWidget/DropDownWidget.dart';
 import 'addserver.dart';
 
 class AddTrojan extends StatefulWidget {
-  const AddTrojan({Key? key}) : super(key: key);
+  const AddTrojan({Key? key, this.protocolType}) : super(key: key);
 
+  final String? protocolType;
   @override
   _AddTrojanState createState() => _AddTrojanState();
 }
@@ -22,9 +23,14 @@ class _AddTrojanState extends State<AddTrojan> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          Icon(
-            Icons.check,
-            color: Colors.black,
+          IconButton(
+            icon: Icon(
+              Icons.check,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           )
         ],
       ),
@@ -36,7 +42,7 @@ class _AddTrojanState extends State<AddTrojan> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Protocol Type'),
-                DropDownWidget(),
+                Text(widget.protocolType!),
               ],
             ),
           ),

@@ -4,8 +4,9 @@ import 'package:vtrspeed/customWidget/DropDownWidget.dart';
 import 'addserver.dart';
 
 class AddVMESS extends StatefulWidget {
-  const AddVMESS({Key? key}) : super(key: key);
+  const AddVMESS({Key? key, this.protocolType}) : super(key: key);
 
+  final String? protocolType;
   @override
   _AddVMESSState createState() => _AddVMESSState();
 }
@@ -25,9 +26,14 @@ class _AddVMESSState extends State<AddVMESS> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          Icon(
-            Icons.check,
-            color: Colors.black,
+          IconButton(
+            icon: Icon(
+              Icons.check,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           )
         ],
       ),
@@ -39,7 +45,7 @@ class _AddVMESSState extends State<AddVMESS> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Protocol Type'),
-                DropDownWidget(),
+                Text(widget.protocolType!),
               ],
             ),
           ),

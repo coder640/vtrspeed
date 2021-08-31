@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:vtrspeed/connectionScreens/connecting.dart';
 import 'package:vtrspeed/customWidget/drawerWidget.dart';
 import 'package:vtrspeed/page/country_page.dart';
+import 'package:vtrspeed/screens/settings.dart';
 
 class Connect extends StatefulWidget {
   const Connect({Key? key}) : super(key: key);
@@ -12,21 +13,134 @@ class Connect extends StatefulWidget {
   _ConnectState createState() => _ConnectState();
 }
 
-final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+final GlobalKey<ScaffoldState> _drawerkey = GlobalKey<ScaffoldState>();
 
 class _ConnectState extends State<Connect> {
-  String locationName = 'USA';
+  String _information = 'USA';
+
+  String _serverProtocol = 'AnyConnect';
+
+  void updateInformation(String information) {
+    setState(() => _information = information);
+  }
+
+  void updateServerInformation(String serverProtocol) {
+    setState(() => _serverProtocol = serverProtocol);
+  }
+
+  void moveToSecondPage() async {
+    final information = await Navigator.push(
+      context,
+      CupertinoPageRoute(
+          fullscreenDialog: true, builder: (context) => ChooseLocation()),
+    );
+    updateInformation(information);
+  }
+
+  void moveToSetting() async {
+    final serverProtocol = await Navigator.push(
+      context,
+      CupertinoPageRoute(
+          fullscreenDialog: true, builder: (context) => Settings()),
+    );
+    updateServerInformation(serverProtocol);
+  }
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      key: _scaffoldKey,
+      key: _drawerkey,
       drawer: Container(
         width: width - 60,
         child: Drawer(
-          child: DrwerWidget(),
+          child: DrawerHeader(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage:
+                        Image.asset('assets/accountpic.jpeg').image,
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Center(child: Text('User Name')),
+                Center(child: Text('Expire Date')),
+                Divider(),
+                SizedBox(
+                  height: 20,
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.home,
+                    color: Color(0xffB4B4B4),
+                  ),
+                  title: Text('Home'),
+                ),
+                ListTile(
+                  leading: Container(
+                      height: 20,
+                      width: 20,
+                      child: Image.asset('assets/serviceIcon.jpeg')),
+                  title: Text('Services'),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.settings,
+                    color: Color(0xffB4B4B4),
+                  ),
+                  title: GestureDetector(
+                      onTap: () {
+                        moveToSetting();
+                      },
+                      child: Text('Settings')),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.mail,
+                    color: Color(0xffB4B4B4),
+                  ),
+                  title: Text('Contact'),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.info,
+                    color: Color(0xffB4B4B4),
+                  ),
+                  title: Text('v20210601'),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.logout,
+                    color: Color(0xffB4B4B4),
+                  ),
+                  title: Text('LogOut'),
+                ),
+                SizedBox(
+                  height: 60,
+                ),
+                Container(
+                  height: 50,
+                  width: 200,
+                  color: Colors.pink,
+                  child: Center(
+                    child: Text(
+                      'Mix Service',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
       body: Container(
@@ -52,7 +166,7 @@ class _ConnectState extends State<Connect> {
                   children: [
                     IconButton(
                         onPressed: () {
-                          _scaffoldKey.currentState!.openDrawer();
+                          _drawerkey.currentState!.openDrawer();
                         },
                         icon: Icon(Icons.menu, color: Colors.white)),
                   ],
@@ -117,17 +231,19 @@ class _ConnectState extends State<Connect> {
                   //     useSafeArea: false),
                   ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ChooseLocation()));
+                        //    setState(() {});
+                        moveToSecondPage();
                       },
-                      child: Text(locationName)),
+                      child: Container(
+                        width: width / 3,
+                        height: height * 0.04,
+                        child: Text(_information),
+                      )),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'AnyConnect',
+                    _serverProtocol,
                     style: TextStyle(color: Colors.white),
                   ),
                   SizedBox(
@@ -138,7 +254,9 @@ class _ConnectState extends State<Connect> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Connecting()));
+                                builder: (context) => Connecting(
+                                      LocationName: _information,
+                                    )));
                       },
                       child: Stack(
                         alignment: Alignment.center,

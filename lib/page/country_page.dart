@@ -53,10 +53,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
               child: ListTile(
                 onTap: () {
                   print(locations[index].location);
-                  setState(() {
-                    String locationName = '${locations[index].location}';
-                  });
-                  Navigator.pop(context);
+                  Navigator.pop(context, locations[index].location);
                 },
                 title: Text(locations[index].location),
                 leading: Container(

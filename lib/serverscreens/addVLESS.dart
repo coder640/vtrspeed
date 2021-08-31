@@ -3,8 +3,9 @@ import 'package:vtrspeed/customWidget/DropDownWidget.dart';
 import 'addserver.dart';
 
 class AddVLESS extends StatefulWidget {
-  const AddVLESS({Key? key}) : super(key: key);
+  const AddVLESS({Key? key, this.protocolType}) : super(key: key);
 
+  final String? protocolType;
   @override
   _AddVLESSState createState() => _AddVLESSState();
 }
@@ -25,9 +26,14 @@ class _AddVLESSState extends State<AddVLESS> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          Icon(
-            Icons.check,
-            color: Colors.black,
+          IconButton(
+            icon: Icon(
+              Icons.check,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           )
         ],
       ),
@@ -39,7 +45,7 @@ class _AddVLESSState extends State<AddVLESS> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Protocol Type'),
-                DropDownWidget(),
+                Text(widget.protocolType!),
               ],
             ),
           ),

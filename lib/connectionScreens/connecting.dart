@@ -6,8 +6,8 @@ import 'package:vtrspeed/connectionScreens/connectionFailed.dart';
 import 'package:vtrspeed/customWidget/drawerWidget.dart';
 
 class Connecting extends StatefulWidget {
-  const Connecting({Key? key}) : super(key: key);
-
+  const Connecting({Key? key, this.LocationName}) : super(key: key);
+  final String? LocationName;
   @override
   _ConnectingState createState() => _ConnectingState();
 }
@@ -77,7 +77,7 @@ class _ConnectingState extends State<Connecting> {
                     height: 50,
                   ),
                   Text(
-                    'USA - LAX',
+                    widget.LocationName!,
                     style: TextStyle(color: Colors.white),
                   ),
                   SizedBox(

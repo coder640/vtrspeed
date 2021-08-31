@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vtrspeed/connectionScreens/connect.dart';
 import 'package:vtrspeed/screens/settings.dart';
 
 class DrwerWidget extends StatelessWidget {
@@ -47,12 +48,7 @@ class DrwerWidget extends StatelessWidget {
               Icons.settings,
               color: Color(0xffB4B4B4),
             ),
-            title: GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Settings()));
-                },
-                child: Text('Settings')),
+            title: GestureDetector(onTap: () {}, child: Text('Settings')),
           ),
           ListTile(
             leading: Icon(

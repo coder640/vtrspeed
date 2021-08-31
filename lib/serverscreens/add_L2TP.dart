@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:vtrspeed/customWidget/DropDownWidget.dart';
-
 import 'addserver.dart';
 
 class AddL2TP extends StatefulWidget {
-  const AddL2TP({Key? key}) : super(key: key);
+  const AddL2TP({Key? key, this.protocolType}) : super(key: key);
+
+  final String? protocolType;
 
   @override
   _AddL2TPState createState() => _AddL2TPState();
@@ -24,9 +24,14 @@ class _AddL2TPState extends State<AddL2TP> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          Icon(
-            Icons.check,
-            color: Colors.black,
+          IconButton(
+            icon: Icon(
+              Icons.check,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           )
         ],
       ),
@@ -38,7 +43,7 @@ class _AddL2TPState extends State<AddL2TP> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Protocol Type'),
-                DropDownWidget(),
+                Text(widget.protocolType!),
               ],
             ),
           ),
